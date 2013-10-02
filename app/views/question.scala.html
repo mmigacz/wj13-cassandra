@@ -1,0 +1,17 @@
+@(question: Question, form: Form[Answer])
+
+@main(question.title) {
+    <h1>@question.title</h1>
+    <p id="questionText">@question.text</p>
+    <p>Asked by @question.author.getDisplayName() @util.DateFormatter.format(question.date)</p>
+
+
+    <hr/>
+
+    <h1>Post Answer</h1>
+    @helper.form(action = routes.QuestionController.postAnswer(question.id)) {
+        <p><textarea id="answerArea" name="text">@form("text").value</textarea></p>
+        <p><input type="submit" value="Submit"/></p>
+    }
+
+}

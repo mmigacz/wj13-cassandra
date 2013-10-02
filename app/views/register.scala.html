@@ -1,0 +1,25 @@
+@(form: Form[NewUser])
+
+@main("Register") {
+
+    @helper.form(routes.LoginController.register()) {
+        <h1>Register</h1>
+
+        @if(form.hasGlobalErrors) {
+        <p class="error">
+            @form.globalError.message
+        </p>
+        }
+        <p><input type="text" name="login" placeholder="Login" value="@form("login").value"></p>
+        <p><input type="text" name="firstName" placeholder="First name" value="@form("firstName").value"></p>
+        <p><input type="login" name="lastName" placeholder="Last name" value="@form("lastName").value"></p>
+        <p><input type="email" name="email" placeholder="EMail" value="@form("email").value"></p>
+        <p><input type="password" name="password" placeholder="Password"></p>
+        <p><input type="password" name="password2" placeholder="Retype password"></p>
+
+        <p>
+            <button type="submit" name="_register">Register</button>
+            <button type="submit" name="_cancel">Cancel</button>
+        </p>
+    }
+}

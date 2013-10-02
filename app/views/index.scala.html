@@ -1,0 +1,20 @@
+@(questions: Collection[Question])
+
+@main("Top Questions") {
+    <h1>Top Questions</h1>
+    <div id="questions">
+        <table>
+            @for(question <- questions) {
+                <tr>
+                    <td id="answerCount" class="count">@question.answerCount<br/><span class="label">answers</span></td>
+                    <td id="voteCount" class="count">@question.voteCount<br/><span class="label">votes</span></td>
+                    <td id="viewCount" class="count">@question.viewCount<br/><span class="label">views</span></td>
+                    <td id="questionTitle"><a href="@routes.QuestionController.display(question.id)">@question.title</a></td>
+                    <td id="questionAuthor">asked by
+                        <a href="@routes.UserProfileController.display(question.author.login)">@question.author.getDisplayName()</a>
+                        <br/>@util.DateFormatter.format(question.date)</td>
+                </tr>
+            }
+        </table>
+    </div>
+}

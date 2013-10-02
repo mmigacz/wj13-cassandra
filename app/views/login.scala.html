@@ -1,0 +1,25 @@
+@(credentials: Form[Credentials])
+
+@main("Sign in") {
+
+    @helper.form(routes.LoginController.login()) {
+        <h1>Sign in</h1>
+
+        @if(credentials.hasGlobalErrors) {
+        <p class="error">
+            @credentials.globalError.message
+        </p>
+        }
+
+        <p>
+            <input type="login" name="login" placeholder="Login" value="@credentials("login").value">
+        </p>
+        <p>
+            <input type="password" name="password" placeholder="Password">
+        </p>
+        <p>
+            <button type="submit" name="_login">Login</button>
+            <button type="submit" name="_cancel">Cancel</button>
+        </p>
+    }
+}
