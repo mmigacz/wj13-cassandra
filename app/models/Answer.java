@@ -1,11 +1,14 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Answer {
     public String id;
-    public User user;
+    public User author;
     public String text;
-    public int votes;
-    public List<Comment> comments;
+    public Date date;
+    public int voteCount;
+    public List<Comment> comments = new ArrayList<Comment>();
 }

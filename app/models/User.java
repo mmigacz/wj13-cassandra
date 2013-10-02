@@ -18,7 +18,7 @@ public class User {
     @Constraints.MinLength(8)
     public String password;
 
-    public int reputation;
+    public int reputation = 0;
 
     public User(String login) {
         this.login = login;

@@ -1,4 +1,4 @@
-name := "wj13-cassandra-app-stub-play"
+name := "wj13-cassandra-"
 
 version := "1.0-SNAPSHOT"
 
