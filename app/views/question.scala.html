@@ -1,27 +1,70 @@
 @(question: QuestionWithAnswers, form: Form[Answer])
 
 @main(question.title) {
-    <h1>@question.title</h1>
-    <div id="question">
-        <p class="text">@question.text</p>
-        <p class="author">Asked by @question.author.getDisplayName() @util.DateFormatter.format(question.date)</p>
+    <div class="row">
+        <div class="col-lg-1">
+            <div class="btn-group-vertical">
+                <button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-chevron-up"></span></button>
+                <button type="button" class="btn btn-default btn-lg"><strong class="text-success">234</strong></button>
+                <button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-chevron-down"></span></button>
+                <button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-star-empty"></span></button>
+            </div>
+        </div>
+        <div class="col-lg-11">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                @question.title
+                </div>
+                <div class="panel-body">
+                    <p class="text">@question.text</p>
+                </div>
+                <div class="panel-footer">
+                    <small class="pull-right">
+                        Asked by @question.author.getDisplayName() @util.DateFormatter.format(question.date)</small>&nbsp;
+                </div>
+            </div>
+        </div>
     </div>
 
-    <h1>@question.answers.size Answer(s)</h1>
+    <div class="page-header">
+        <h3>@question.answers.size Answer(s)</h3>
+    </div>
 
     @for(answer <- question.answers) {
-        <div class="answer">
-            <p class="text">@answer.text</p>
-            <p class="author">Answered by @answer.author.getDisplayName() @util.DateFormatter.format(answer.date)</p>
+        <div class="row">
+            <div class="col-lg-1">
+                <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-chevron-up"></span></button>
+                    <button type="button" class="btn btn-default btn-lg"><strong class="text-success">234</strong></button>
+                    <button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-chevron-down"></span></button>
+                    <button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-star-empty"></span></button>
+                </div>
+            </div>
+            <div class="col-lg-11">
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <p class="text">@answer.text</p>
+                    </div>
+                    <div class="panel-footer">
+                        <small class="pull-right">
+                        Answered by @answer.author.getDisplayName() @util.DateFormatter.format(answer.date)</small> &nbsp;
+                    </div>
+                </div>
+            </div>
         </div>
     }
 
     @if(LoginController.isAuthenticated()) {
-        <div id="answerForm">
-            <h1>Post Answer</h1>
-            @helper.form(action = routes.QuestionController.postAnswer(question.id)) {
-                <p><textarea id="answerArea" name="text">@form("text").value</textarea></p>
-                <p><input type="submit" value="Submit"/></p>
+        <div id="answerForm" class="row">
+            <div class="page-header">
+                <h3>Post Answer</h3>
+            </div>
+            @helper.form(action = routes.QuestionController.postAnswer(question.id), 'role -> "form") {
+                <div class="form-group">
+                    <textarea class="form-control" id="answerArea" name="text">@form("text").value</textarea>
+                </div>
+
+                <button type="submit" value="Submit" class="btn btn-primary btn-lg">Submit</button>
             }
         </div>
     }
