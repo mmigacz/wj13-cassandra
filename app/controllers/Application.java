@@ -45,4 +45,26 @@ public class Application extends Controller {
         return ok(index.render(questions));
     }
 
+    public static Result recent() {
+        return index();
+    }
+
+    public static Result popular() {
+        return ok();
+    }
+
+    public static Result active() {
+        return ok();
+    }
+
+    public static Result unanswered() {
+        return ok();
+    }
+
+    public static Result askedBy(String userId) {
+        return ok();
+    }
+
+
+
 }

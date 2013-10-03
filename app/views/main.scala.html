@@ -9,22 +9,37 @@
         <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
     </head>
     <body>
-        <div id="commandBar">
-            <span id="logo">HeapOverflow</span>
+        <div id="container">
+            <table id="commandBar" style="width:100%">
+                <tr>
+                    <td id="logo" style="width:1px;padding-right:2em">HeapOverflow</td>
+                <td>
+                    <span class="button"><a href="@routes.Application.recent()">Recent</a></span>
+                    <span class="button"><a href="@routes.Application.popular()">Popular</a></span>
+                    <span class="button"><a href="@routes.Application.active()">Active</a></span>
+                    <span class="button"><a href="@routes.Application.unanswered()">Unanswered</a></span>
 
-            @if(LoginController.isAuthenticated()) {
-                <span>Logged in as:
-                    <a href="@routes.UserProfileController.display(LoginController.getCurrentUser().login)">
-                        @LoginController.getCurrentUser().getDisplayName()</a></span>
-                <span><a href="@routes.LoginController.logout()">Logout</a></span>
-            }
-            @if(!LoginController.isAuthenticated()) {
-                <span><a href="@routes.LoginController.displayLoginPage()">Sign in</a></span>
-                <span><a href="@routes.LoginController.displayRegistrationPage()">Register</a></span>
-            }
-        </div>
-        <div id="content">
-            @content
+                    @if(LoginController.isAuthenticated()) {
+                    <span class="button"><a href="@routes.Application.askedBy(LoginController.getCurrentUserId())">Asked by me</a></span>
+                    }
+                </td>
+
+                <td style="text-align: right">
+                    @if(LoginController.isAuthenticated()) {
+                        <span>Logged in as:
+                            <a href="@routes.UserProfileController.display(LoginController.getCurrentUser().login)">
+                                @LoginController.getCurrentUser().getDisplayName()</a></span>
+                        <span><a href="@routes.LoginController.logout()">Logout</a></span>
+                    }
+                    @if(!LoginController.isAuthenticated()) {
+                        <span><a href="@routes.LoginController.displayLoginPage()">Sign in</a></span>
+                        <span><a href="@routes.LoginController.displayRegistrationPage()">Register</a></span>
+                    }
+                </td>
+            </table>
+            <div id="content">
+                @content
+            </div>
         </div>
     </body>
 </html>
