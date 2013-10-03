@@ -60,7 +60,23 @@ public class QuestionController extends Controller {
     }
 
     public static Result postAnswer(String id) {
+        if (!LoginController.isAuthenticated())
+            return badRequest("You must be authenticated to post answers");
+
         Form<Answer> answerForm = Form.form(Answer.class).bindFromRequest(request());
+        if (!answerForm.hasErrors()) {
+            Answer answer = answerForm.get();
+            answer.author = LoginController.getCurrentUser();
+            answer.date = new Date();
+            answer.voteCount = 0;
+            saveAnswer(id, answer);
+        }
         return redirect(routes.QuestionController.display(id));
+    }
+
+    private static void saveAnswer(String questionId, Answer answer) {
+        // TODO: Add answer to the database
+
+        // --------------------------------
     }
 }
