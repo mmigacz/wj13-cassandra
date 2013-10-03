@@ -1,25 +1,57 @@
 @(form: Form[NewUser])
 
-@main("Register") {
+    @main("Register") {
 
-    @helper.form(routes.LoginController.register()) {
-        <h1>Register</h1>
+        @helper.form(routes.LoginController.register(), 'class -> "form-horizontal", 'role -> "form") {
+            <div class="page-header">
+                <h1>Register</h1>
+            </div>
 
-        @if(form.hasGlobalErrors) {
-        <p class="error">
-            @form.globalError.message
-        </p>
+            @if(form.hasGlobalErrors) {
+                <p class="error">
+                @form.globalError.message
+                </p>
+            }
+            <div class="form-group">
+                <label class="col-lg-4 control-label" for="loginField">Login</label>
+                <div class="col-lg-8">
+                    <input class="form-control" id="loginField" type="text" name="login" placeholder="enter login here..." value="@form("login").value" required="true"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label" for="firstNameField">First name</label>
+                <div class="col-lg-8">
+                    <input class="form-control" id="firstNameField" type="text" name="firstName" placeholder="enter your first name..." value="@form("firstName").value" required="true"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label" for="lastNameField">Last name</label>
+                <div class="col-lg-8">
+                    <input class="form-control" id="lastNameField" type="text" name="lastName" placeholder="enter your last name..." value="@form("lastName").value" required="true"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label" for="emailField">Email</label>
+                <div class="col-lg-8">
+                    <input class="form-control" id="emailField" type="email" name="email" placeholder="enter your email..." value="@form("email").value" required="true"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label" for="passwordField">Password</label>
+                <div class="col-lg-8">
+                    <input class="form-control" id="passwordField" type="password" name="password" placeholder="enter your password..." required="true"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label" for="password2Field">Retype password</label>
+                <div class="col-lg-8">
+                    <input class="form-control" id="password2Field" type="password" name="password2" placeholder="retype your password..." required="true"/>
+                </div>
+            </div>
+
+            <div class="col-lg-8 col-lg-offset-4">
+                <button type="submit" name="_register" class="btn btn-primary">Register</button>
+                <button type="submit" name="_cancel" class="btn">Cancel</button>
+            </div>
         }
-        <p><input type="text" name="login" placeholder="Login" value="@form("login").value"></p>
-        <p><input type="text" name="firstName" placeholder="First name" value="@form("firstName").value"></p>
-        <p><input type="login" name="lastName" placeholder="Last name" value="@form("lastName").value"></p>
-        <p><input type="email" name="email" placeholder="EMail" value="@form("email").value"></p>
-        <p><input type="password" name="password" placeholder="Password"></p>
-        <p><input type="password" name="password2" placeholder="Retype password"></p>
-
-        <p>
-            <button type="submit" name="_register">Register</button>
-            <button type="submit" name="_cancel">Cancel</button>
-        </p>
     }
-}
