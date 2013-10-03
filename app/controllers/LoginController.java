@@ -17,6 +17,10 @@ public class LoginController extends Controller {
         return session("currentUser") != null;
     }
 
+    public static String getCurrentUserId() {
+        return session("currentUser");
+    }
+
     public static User getCurrentUser() {
         String login = session("currentUser");
         if (login == null)

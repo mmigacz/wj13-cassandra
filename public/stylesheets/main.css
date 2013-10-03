@@ -4,6 +4,7 @@ body {
     font-size: 11pt;
     padding: 0px;
     margin: 0px;
+    background-color: white;
 }
 
 h1 {
@@ -20,24 +21,28 @@ a:hover {
     color: #4466FF;
 }
 
+#container {
+    width: 70em;
+    background-color: white;
+    margin:auto;
+}
 
 #content {
-    margin: auto;
+    margin-left: 2em;
+    margin-right: 2em;
     margin-top: 2em;
-    width: 60em;
 
 }
 
 #logo {
     font-size: 16pt;
     font-weight: bold;
-    margin-right: 5em;
 }
 
 #commandBar {
     background-color: #EEEEEE;
     padding: 0.5em;
-    margin-top: 0px;
+    margin-top: 2em;
 }
 
 #commandBar span {
@@ -46,6 +51,7 @@ a:hover {
 }
 
 #questions table {
+    width: 100%;
     border-collapse: collapse;
 }
 
@@ -64,7 +70,7 @@ a:hover {
 }
 
 #questionTitle {
-    width: 30em;
+    width: 40em;
     font-weight: bold;
 }
 
@@ -75,6 +81,7 @@ a:hover {
 #questions #questionAuthor {
     font-size: 10pt;
     color: #555555;
+    text-align: right;
 }
 
 #answerArea {

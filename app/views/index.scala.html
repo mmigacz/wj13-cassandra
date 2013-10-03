@@ -1,7 +1,7 @@
-@(questions: Collection[Question])
+@(header: String, questions: Collection[Question])
 
-@main("Top Questions") {
-    <h1>Top Questions</h1>
+@main(header) {
+    <h1>@header</h1>
     <div id="questions">
         <table>
             @for(question <- questions) {

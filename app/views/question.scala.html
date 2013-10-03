@@ -16,12 +16,14 @@
         </div>
     }
 
-    <div id="answerForm">
-        <h1>Post Answer</h1>
-        @helper.form(action = routes.QuestionController.postAnswer(question.id)) {
-            <p><textarea id="answerArea" name="text">@form("text").value</textarea></p>
-            <p><input type="submit" value="Submit"/></p>
-        }
-    </div>
+    @if(LoginController.isAuthenticated()) {
+        <div id="answerForm">
+            <h1>Post Answer</h1>
+            @helper.form(action = routes.QuestionController.postAnswer(question.id)) {
+                <p><textarea id="answerArea" name="text">@form("text").value</textarea></p>
+                <p><input type="submit" value="Submit"/></p>
+            }
+        </div>
+    }
 
 }

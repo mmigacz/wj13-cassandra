@@ -4,6 +4,7 @@ import models.Question;
 import models.User;
 import play.mvc.*;
 import views.html.*;
+import views.html.index;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +13,12 @@ import java.util.List;
 public class Application extends Controller {
 
     public static Result index() {
+        return recent();
+    }
+
+    public static Result recent() {
+
+        // TODO: Fetch recent questions from the database:
         User user = new User("jk");
         user.firstName = "Jan";
         user.lastName = "Kowalski";
@@ -42,7 +49,36 @@ public class Application extends Controller {
         questions.add(q2);
         questions.add(q3);
 
-        return ok(index.render(questions));
+        // -----------------------------------
+
+        return ok(index.render("Recent Questions", questions));
     }
+
+    public static Result popular() {
+
+        // TODO: Fetch popular questions from the database:
+        List<Question> questions = new ArrayList<Question>();
+
+        return ok(index.render("Popular Questions", questions));
+    }
+
+    public static Result active() {
+        // TODO: Fetch active questions from the database:
+
+        List<Question> questions = new ArrayList<Question>();
+        return ok(index.render("Active Questions", questions));
+    }
+
+    public static Result unanswered() {
+        List<Question> questions = new ArrayList<Question>();
+        return ok(index.render("Unanswered Questions", questions));
+    }
+
+    public static Result askedBy(String userId) {
+        List<Question> questions = new ArrayList<Question>();
+        return ok(index.render("My Questions", questions));
+    }
+
+
 
 }
