@@ -24,5 +24,10 @@ GET     /profile/:id                controllers.UserProfileController.display(id
 GET     /question/:id               controllers.QuestionController.display(id: String)
 POST    /question/:id               controllers.QuestionController.postAnswer(id: String)
 
+GET     /question/:id/upvote          controllers.QuestionController.upvoteQuestion(id: String)
+GET     /question/:id/downvote        controllers.QuestionController.downvoteQuestion(id: String)
+GET     /question/:id/upvote/:aid     controllers.QuestionController.upvoteAnswer(id: String, aid: String)
+GET     /question/:id/downvote/:aid   controllers.QuestionController.downvoteAnswer(id: String, aid: String)
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

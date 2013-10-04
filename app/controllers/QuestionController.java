@@ -79,4 +79,30 @@ public class QuestionController extends Controller {
 
         // --------------------------------
     }
+
+    public static Result upvoteQuestion(String questionId) {
+        // TODO: Update number of votes and save into database
+
+        return redirect(routes.QuestionController.display(questionId));
+    }
+
+    public static Result upvoteAnswer(String questionId, String answerId) {
+        // TODO: Update number of votes and save into database
+
+        return redirect(routes.QuestionController.display(questionId));
+    }
+
+    public static Result downvoteQuestion(String questionId) {
+        // TODO: Update number of votes and save into database
+
+        return redirect(routes.QuestionController.display(questionId));
+    }
+
+    public static Result downvoteAnswer(String questionId, String answerId) {
+        // TODO: Update number of votes and save into database
+
+        return redirect(routes.QuestionController.display(questionId));
+    }
 }
+
+
