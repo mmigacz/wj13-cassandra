@@ -1,15 +1,15 @@
-@(header: String, questions: Collection[Question])
+@(header: String, questionList: QuestionList)
 
 @main(header) {
         <div class="row">
             <ul class="nav nav-pills">
-                <li class="active"><a href="@routes.Application.recent()">Recent</a></li>
-                <li><a href="@routes.Application.popular()">Popular</a></li>
-                <li><a href="@routes.Application.active()">Active</a></li>
-                <li><a href="@routes.Application.unanswered()">Unanswered</a></li>
+                <li class="@questionList.categoryButtonClass(QuestionList.Category.RECENT)"><a href="@routes.Application.recent()">Recent</a></li>
+                <li class="@questionList.categoryButtonClass(QuestionList.Category.POPULAR)"><a href="@routes.Application.popular()">Popular</a></li>
+                <li class="@questionList.categoryButtonClass(QuestionList.Category.ACTIVE)"><a href="@routes.Application.active()">Active</a></li>
+                <li class="@questionList.categoryButtonClass(QuestionList.Category.UNANSWERED)"><a href="@routes.Application.unanswered()">Unanswered</a></li>
 
                 @if(LoginController.isAuthenticated()) {
-                    <li ><a href="@routes.Application.askedBy(LoginController.getCurrentUserId())">
+                    <li class="@questionList.categoryButtonClass(QuestionList.Category.ASKED_BY_ME)"><a href="@routes.Application.askedByMe()">
                         Asked by me</a></li>
                 }
             </ul>
@@ -25,7 +25,7 @@
             <div id="questions">
                 <table class="table">
                     <tbody>
-                    @for(question <- questions) {
+                    @for(question <- questionList.questions) {
                         <tr>
                             <td id="answerCount" class="count">@question.answerCount <br/> answers</td>
                             <td id="voteCount" class="count">@question.voteCount <br/> votes</td>
@@ -38,6 +38,13 @@
                     }
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div style="text-align: center">
+                <a class="btn btn-default" href="@questionList.backwardLink"><span class="glyphicon glyphicon-backward"></span></a>
+                <a class="btn btn-default" href="@questionList.forwardLink"><span class="glyphicon glyphicon-forward"></span></a>
             </div>
         </div>
     }

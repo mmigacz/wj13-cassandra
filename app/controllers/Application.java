@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Question;
+import models.QuestionList;
 import models.User;
 import play.mvc.*;
 import views.html.*;
@@ -17,7 +18,6 @@ public class Application extends Controller {
     }
 
     public static Result recent() {
-
         // TODO: Fetch recent questions from the database:
         User user = new User("jk");
         user.firstName = "Jan";
@@ -51,34 +51,90 @@ public class Application extends Controller {
 
         // -----------------------------------
 
-        return ok(index.render("Recent Questions", questions));
+        QuestionList questionList = new QuestionList(QuestionList.Category.RECENT, questions);
+        return ok(index.render("Recent Questions", questionList));
+    }
+
+    public static Result recentAfter(String questionId) {
+        // TODO: Implement paging:
+        return recent();
+    }
+
+    public static Result recentBefore(String questionId) {
+        // TODO: Implement paging:
+        return recent();
     }
 
     public static Result popular() {
-
         // TODO: Fetch popular questions from the database:
         List<Question> questions = new ArrayList<Question>();
+        QuestionList questionList = new QuestionList(QuestionList.Category.POPULAR, questions);
+        return ok(index.render("Popular Questions", questionList));
+    }
 
-        return ok(index.render("Popular Questions", questions));
+    public static Result popularAfter(String questionId) {
+        // TODO: Implement paging
+        return popular();
+    }
+
+    public static Result popularBefore(String questionId) {
+        // TODO: Implement paging
+        return popular();
     }
 
     public static Result active() {
         // TODO: Fetch active questions from the database:
 
         List<Question> questions = new ArrayList<Question>();
-        return ok(index.render("Active Questions", questions));
+        QuestionList questionList = new QuestionList(QuestionList.Category.ACTIVE, questions);
+        return ok(index.render("Active Questions", questionList));
+    }
+
+    public static Result activeAfter(String questionId) {
+        // TODO: Paging
+        return active();
+    }
+
+    public static Result activeBefore(String questionId) {
+        // TODO: Paging
+        return active();
     }
 
     public static Result unanswered() {
+        // TODO: Fetch unanswered questions from the database:
+
         List<Question> questions = new ArrayList<Question>();
-        return ok(index.render("Unanswered Questions", questions));
+        QuestionList questionList = new QuestionList(QuestionList.Category.UNANSWERED, questions);
+        return ok(index.render("Unanswered Questions", questionList));
     }
 
-    public static Result askedBy(String userId) {
-        List<Question> questions = new ArrayList<Question>();
-        return ok(index.render("My Questions", questions));
+    public static Result unansweredAfter(String questionId) {
+        // TODO: Paging
+        return unanswered();
     }
 
+    public static Result unansweredBefore(String questionId) {
+        // TODO: Paging
+        return unanswered();
+    }
 
+    public static Result askedByMe() {
+        // TODO: Fetch my questions from the database:
 
+        String userId = LoginController.getCurrentUserId();
+        List<Question> questions = new ArrayList<Question>();
+        QuestionList questionList = new QuestionList(QuestionList.Category.ASKED_BY_ME, questions);
+        return ok(index.render("My Questions", questionList));
+
+    }
+
+    public static Result askedByMeAfter(String questionId) {
+        // TODO: Paging
+        return askedByMe();
+    }
+
+    public static Result askedByMeBefore(String questionId) {
+        // TODO: Paging
+        return askedByMe();
+    }
 }
