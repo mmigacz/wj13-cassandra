@@ -41,10 +41,8 @@
             </div>
         </div>
 
-        <div class="row">
-            <div style="text-align: center">
-                <a class="btn btn-sm @if(questionList.backwardLink == null) {disabled} else {}" href="@questionList.backwardLink"><span class="glyphicon glyphicon-backward"></span></a>
-                <a class="btn btn-sm @if(questionList.forwardLink == null) {disabled} else {}" href="@questionList.forwardLink"><span class="glyphicon glyphicon-forward"></span></a>
-            </div>
-        </div>
+        <ul class="pager">
+             <li class="previous"><a class="btn btn-sm @if(questionList.backwardLink == null) {disabled} else {}" href="@questionList.backwardLink"><span class="glyphicon glyphicon-backward"></span></a></li>
+             <li class="next"><a class="btn btn-sm @if(questionList.forwardLink == null) {disabled} else {}" href="@questionList.forwardLink"><span class="glyphicon glyphicon-forward"></span></a><li>
+        </ul>
     }

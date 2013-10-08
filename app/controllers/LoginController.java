@@ -28,7 +28,7 @@ public class LoginController extends Controller {
         return getUser(login);
     }
 
-    private static User getUser(String login) {
+    public static User getUser(String login) {
         return new User(login);
     }
 

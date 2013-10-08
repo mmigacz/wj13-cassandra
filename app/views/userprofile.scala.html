@@ -1,0 +1,30 @@
+@(user:User)
+
+@main("Profile of " + user.getDisplayName()) {
+
+<div class="page-header">
+    <h1>@user.getDisplayName()</h1>
+</div>
+
+<div class="row">
+        <div class="col-sm-3 col-md-3">
+            <a href="#" class="thumbnail">
+                <img data-src="holder.js/200x200" alt="..."/>
+            </a>
+        </div>
+        <div >
+            <p>Login: @user.login</p>
+            <p>First name: @user.firstName</p>
+            <p>Last name: @user.lastName</p>
+            <p>Email: @user.email</p>
+            <p>Reputation: @user.reputation</p>
+        </div>
+    <div class="row">
+        <a class="btn-primary btn-lg" href="#">Edit</a>
+    </div>
+
+</div>
+
+}
+
+
