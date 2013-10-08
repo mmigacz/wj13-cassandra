@@ -2,8 +2,8 @@ package controllers;
 
 import models.Question;
 import models.User;
-import play.mvc.*;
-import views.html.*;
+import play.mvc.Controller;
+import play.mvc.Result;
 import views.html.index;
 
 import java.util.ArrayList;
@@ -51,34 +51,43 @@ public class Application extends Controller {
 
         // -----------------------------------
 
-        return ok(index.render("Recent Questions", questions));
+        return ok(index.render("Recent Questions", 1, questions));
     }
 
-    public static Result popular() {
+    public static Result votes() {
 
-        // TODO: Fetch popular questions from the database:
+        // TODO: Fetch questions by the number of votes
         List<Question> questions = new ArrayList<Question>();
 
-        return ok(index.render("Popular Questions", questions));
+        return ok(index.render("Popular Questions", 2, questions));
     }
 
-    public static Result active() {
-        // TODO: Fetch active questions from the database:
+    public static Result answers() {
+        // TODO: Fetch questions by the number of answers
 
         List<Question> questions = new ArrayList<Question>();
-        return ok(index.render("Active Questions", questions));
+        return ok(index.render("Active Questions", 3, questions));
     }
 
     public static Result unanswered() {
+        // TODO: Fetch unanswered questions
+
         List<Question> questions = new ArrayList<Question>();
-        return ok(index.render("Unanswered Questions", questions));
+        return ok(index.render("Unanswered Questions", 4, questions));
     }
 
     public static Result askedBy(String userId) {
+        // TODO: Fetch questions asked by a given user
+
         List<Question> questions = new ArrayList<Question>();
-        return ok(index.render("My Questions", questions));
+        return ok(index.render("My Questions", 5, questions));
     }
 
+    public static Result followedBy(String userId) {
+        // TODO: Fetch questions followed by a given user
 
+        List<Question> questions = new ArrayList<Question>();
+        return ok(index.render("Followed", 6, questions));
+    }
 
 }

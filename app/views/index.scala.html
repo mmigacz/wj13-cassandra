@@ -1,16 +1,17 @@
-@(header: String, questions: Collection[Question])
+@(header: String, menu: Int, questions: java.util.Collection[Question])
 
 @main(header) {
         <div class="row">
             <ul class="nav nav-pills">
-                <li class="active"><a href="@routes.Application.recent()">Recent</a></li>
-                <li><a href="@routes.Application.popular()">Popular</a></li>
-                <li><a href="@routes.Application.active()">Active</a></li>
-                <li><a href="@routes.Application.unanswered()">Unanswered</a></li>
-
-                @if(LoginController.isAuthenticated()) {
-                    <li ><a href="@routes.Application.askedBy(LoginController.getCurrentUserId())">
+                <li class="@if(menu == 1) {active} else {}"><a href="@routes.Application.recent()">Recent</a></li>
+                <li class="@if(menu == 2) {active} else {}"><a href="@routes.Application.votes()">Votes</a></li>
+                <li class="@if(menu == 3) {active} else {}"><a href="@routes.Application.answers()">Answers</a></li>
+                <li class="@if(menu == 4) {active} else {}"><a href="@routes.Application.unanswered()">Unanswered</a></li>
+                @if(LoginController.isAuthenticated) {
+                    <li class="@if(menu == 5) {active} else {}"><a href="@routes.Application.askedBy(LoginController.getCurrentUserId)">
                         Asked by me</a></li>
+                    <li class="@if(menu == 6) {active} else {}"><a href="@routes.Application.followedBy(LoginController.getCurrentUserId)">
+                        Followed</a></li>
                 }
             </ul>
         </div>

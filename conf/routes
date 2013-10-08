@@ -5,9 +5,10 @@
 # Home page
 GET     /                           controllers.Application.index()
 GET     /questions/recent           controllers.Application.recent()
-GET     /questions/popular          controllers.Application.popular()
-GET     /questions/active           controllers.Application.active()
+GET     /questions/votes            controllers.Application.votes()
+GET     /questions/answers          controllers.Application.answers()
 GET     /questions/unanswered       controllers.Application.unanswered()
+GET     /questions/followed/:id     controllers.Application.followedBy(id: String)
 GET     /questions/by/:id           controllers.Application.askedBy(id: String)
 
 # Login page
