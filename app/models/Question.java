@@ -11,4 +11,6 @@ public class Question {
     public int voteCount = 0;
     public int answerCount = 0;
     public int viewCount = 0;
+    public boolean answered;
+    public boolean follow;
 }

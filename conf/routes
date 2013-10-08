@@ -3,12 +3,13 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
+GET     /                           controllers.Application.recent()
 GET     /questions/recent           controllers.Application.recent()
 GET     /questions/popular          controllers.Application.popular()
 GET     /questions/active           controllers.Application.active()
 GET     /questions/unanswered       controllers.Application.unanswered()
 GET     /questions/my               controllers.Application.askedByMe()
+GET     /questions/followed         controllers.Application.followedByMe()
 
 # Login page
 GET     /login                      controllers.LoginController.displayLoginPage()

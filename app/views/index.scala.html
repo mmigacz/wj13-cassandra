@@ -3,14 +3,14 @@
 @main(header) {
         <div class="row">
             <ul class="nav nav-pills">
-                <li class="@questionList.categoryButtonClass(QuestionList.Category.RECENT)"><a href="@routes.Application.recent()">Recent</a></li>
-                <li class="@questionList.categoryButtonClass(QuestionList.Category.POPULAR)"><a href="@routes.Application.popular()">Popular</a></li>
-                <li class="@questionList.categoryButtonClass(QuestionList.Category.ACTIVE)"><a href="@routes.Application.active()">Active</a></li>
-                <li class="@questionList.categoryButtonClass(QuestionList.Category.UNANSWERED)"><a href="@routes.Application.unanswered()">Unanswered</a></li>
+                <li class="@if(questionList.isCategory(QuestionList.Category.RECENT)) {active} else {}"><a href="@routes.Application.recent()">Recent</a></li>
+                <li class="@if(questionList.isCategory(QuestionList.Category.POPULAR)) {active} else {}"><a href="@routes.Application.popular()">Popular</a></li>
+                <li class="@if(questionList.isCategory(QuestionList.Category.ACTIVE)) {active} else {}"><a href="@routes.Application.active()">Active</a></li>
+                <li class="@if(questionList.isCategory(QuestionList.Category.UNANSWERED)) {active} else {}"><a href="@routes.Application.unanswered()">Unanswered</a></li>
 
                 @if(LoginController.isAuthenticated()) {
-                    <li class="@questionList.categoryButtonClass(QuestionList.Category.ASKED_BY_ME)"><a href="@routes.Application.askedByMe()">
-                        Asked by me</a></li>
+                    <li class="@if(questionList.isCategory(QuestionList.Category.ASKED_BY_ME)) {active} else {}"><a href="@routes.Application.askedByMe()">Asked</a></li>
+                    <li class="@if(questionList.isCategory(QuestionList.Category.FOLLOWED_BY_ME)) {active} else {}"><a href="@routes.Application.followedByMe()">Followed</a></li>
                 }
             </ul>
         </div>

@@ -13,10 +13,6 @@ import java.util.List;
 
 public class Application extends Controller {
 
-    public static Result index() {
-        return recent();
-    }
-
     public static Result recent() {
         // TODO: Fetch recent questions from the database:
         User user = new User("jk");
@@ -137,4 +133,25 @@ public class Application extends Controller {
         // TODO: Paging
         return askedByMe();
     }
+
+    public static Result followedByMe() {
+        // TODO: Fetch followed questions from the database:
+
+        String userId = LoginController.getCurrentUserId();
+        List<Question> questions = new ArrayList<Question>();
+        QuestionList questionList = new QuestionList(QuestionList.Category.FOLLOWED_BY_ME, questions);
+        return ok(index.render("Followed Questions", questionList));
+
+    }
+
+    public static Result followedByMeAfter(String questionId) {
+        // TODO: Paging
+        return followedByMe();
+    }
+
+    public static Result followedByMeBefore(String questionId) {
+        // TODO: Paging
+        return followedByMe();
+    }
+
 }
