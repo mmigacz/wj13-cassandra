@@ -43,8 +43,8 @@
 
         <div class="row">
             <div style="text-align: center">
-                <a class="btn btn-default" href="@questionList.backwardLink"><span class="glyphicon glyphicon-backward"></span></a>
-                <a class="btn btn-default" href="@questionList.forwardLink"><span class="glyphicon glyphicon-forward"></span></a>
+                <a class="btn btn-sm @if(questionList.backwardLink == null) {disabled} else {}" href="@questionList.backwardLink"><span class="glyphicon glyphicon-backward"></span></a>
+                <a class="btn btn-sm @if(questionList.forwardLink == null) {disabled} else {}" href="@questionList.forwardLink"><span class="glyphicon glyphicon-forward"></span></a>
             </div>
         </div>
     }

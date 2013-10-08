@@ -48,10 +48,13 @@ public class Application extends Controller {
         // -----------------------------------
 
         QuestionList questionList = new QuestionList(QuestionList.Category.RECENT, questions);
+        questionList.forwardLink = routes.Application.recent().url() + "/after/" + questions.get(questions.size() - 1).id;
         return ok(index.render("Recent Questions", questionList));
     }
 
     public static Result recentAfter(String questionId) {
+
+
         // TODO: Implement paging:
         return recent();
     }

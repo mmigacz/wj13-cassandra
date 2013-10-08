@@ -3,13 +3,26 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.recent()
-GET     /questions/recent           controllers.Application.recent()
-GET     /questions/popular          controllers.Application.popular()
-GET     /questions/active           controllers.Application.active()
-GET     /questions/unanswered       controllers.Application.unanswered()
-GET     /questions/my               controllers.Application.askedByMe()
-GET     /questions/followed         controllers.Application.followedByMe()
+GET     /questions/recent                   controllers.Application.recent()
+GET     /questions/recent/after/:id         controllers.Application.recentAfter(id: String)
+GET     /questions/recent/before/:id        controllers.Application.recentBefore(id: String)
+GET     /                                   controllers.Application.recent()
+
+
+GET     /questions/popular                  controllers.Application.popular()
+GET     /questions/popular/after/:id        controllers.Application.popularAfter(id: String)
+GET     /questions/popular/before/:id       controllers.Application.popularBefore(id: String)
+
+GET     /questions/active                   controllers.Application.active()
+GET     /questions/active/after/:id         controllers.Application.activeAfter(id: String)
+GET     /questions/active/before/:id        controllers.Application.activeBefore(id: String)
+
+GET     /questions/unanswered               controllers.Application.unanswered()
+GET     /questions/unanswered/after/:id     controllers.Application.unansweredAfter(id: String)
+GET     /questions/unanswered/before/:id    controllers.Application.unansweredBefore(id: String)
+
+GET     /questions/my                       controllers.Application.askedByMe()
+GET     /questions/followed                 controllers.Application.followedByMe()
 
 # Login page
 GET     /login                      controllers.LoginController.displayLoginPage()
