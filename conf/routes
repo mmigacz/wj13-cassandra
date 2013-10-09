@@ -23,6 +23,9 @@ GET     /questions/unanswered/before/:id    controllers.Application.unansweredBe
 GET     /questions/my                       controllers.Application.askedByMe()
 GET     /questions/followed                 controllers.Application.followedByMe()
 
+GET     /questions/new                      controllers.NewQuestionController.newQuestionForm()
+POST    /questions/new/save                 controllers.NewQuestionController.saveQuestion()
+
 # Login page
 GET     /login                      controllers.LoginController.displayLoginPage()
 POST    /login                      controllers.LoginController.login()
@@ -33,7 +36,7 @@ GET     /logout                     controllers.LoginController.logout()
 # User profile page
 GET     /profile/view/:id           controllers.UserProfileController.display(id: String)
 GET     /profile/edit               controllers.UserProfileController.edit()
-GET     /profile/save               controllers.UserProfileController.saveProfile()
+POST    /profile/save               controllers.UserProfileController.saveProfile()
 
 # Question page
 GET     /question/:id               controllers.QuestionController.display(id: String)

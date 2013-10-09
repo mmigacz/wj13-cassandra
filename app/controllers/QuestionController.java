@@ -1,7 +1,6 @@
 package controllers;
 
 import models.Answer;
-import models.Question;
 import models.QuestionWithAnswers;
 import models.User;
 import play.data.Form;
@@ -103,6 +102,25 @@ public class QuestionController extends Controller {
 
         return redirect(routes.QuestionController.display(questionId));
     }
+
+    public static Result followQuestion(String questionId) {
+        setFollowStatus(LoginController.getCurrentUserId(), questionId, true);
+
+        return redirect(routes.QuestionController.display(questionId));
+    }
+
+    public static Result unfollowQuestion(String questionId) {
+        setFollowStatus(LoginController.getCurrentUserId(), questionId, false);
+
+        return redirect(routes.QuestionController.display(questionId));
+    }
+
+
+    public static void setFollowStatus(String userId, String questionId, boolean followState) {
+        // TODO: Update follow status in a database
+
+    }
+
 }
 
 

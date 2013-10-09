@@ -1,72 +1,79 @@
 @(question: QuestionWithAnswers, form: Form[Answer])
 
-@main(question.title) {
-    <div class="row">
-        <div class="col-lg-1">
-            <div class="btn-group-vertical">
-                <a class="btn btn-default btn-lg" href="@routes.QuestionController.upvoteQuestion(question.id)"><span class="glyphicon glyphicon-chevron-up"></span></a>
-                <button class="btn btn-default btn-lg"><strong class="text-success">@question.voteCount</strong></button>
-                <a class="btn btn-default btn-lg" href="@routes.QuestionController.downvoteQuestion(question.id)"><span class="glyphicon glyphicon-chevron-down"></span></a>
-                <a class="btn btn-default btn-lg"><span class="glyphicon glyphicon-star-empty"></span></a>
-            </div>
-        </div>
-        <div class="col-lg-11">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                @question.title
-                </div>
-                <div class="panel-body">
-                    <p class="text">@question.text</p>
-                </div>
-                <div class="panel-footer">
-                    <small class="pull-right">
-                        Asked by @question.author.getDisplayName() @util.DateFormatter.format(question.date)</small>&nbsp;
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="page-header">
-        <h3>@question.answers.size Answer(s)</h3>
-    </div>
-
-    @for(answer <- question.answers) {
+    @main(question.title) {
         <div class="row">
             <div class="col-lg-1">
                 <div class="btn-group-vertical">
-                    <a class="btn btn-default btn-lg" href="@routes.QuestionController.upvoteAnswer(question.id, answer.id)"><span class="glyphicon glyphicon-chevron-up"></span></a>
-                    <button type="button" class="btn btn-default btn-lg"><strong class="text-success">@answer.voteCount</strong></button>
-                    <a class="btn btn-default btn-lg" href="@routes.QuestionController.downvoteAnswer(question.id, answer.id)"><span class="glyphicon glyphicon-chevron-down"></span></a>
-                    <a class="btn btn-default btn-lg"><span class="glyphicon glyphicon-star-empty"></span></a>
+                    @if(LoginController.isAuthenticated) {
+                        <a class="btn btn-default btn-lg" href="@routes.QuestionController.upvoteQuestion(question.id)"><span class="glyphicon glyphicon-chevron-up"></span></a>
+                    }
+                    <button class="btn btn-default btn-lg"><strong class="text-success">@question.voteCount</strong></button>
+                    @if(LoginController.isAuthenticated) {
+                        <a class="btn btn-default btn-lg" href="@routes.QuestionController.downvoteQuestion(question.id)"><span class="glyphicon glyphicon-chevron-down"></span></a>
+                        <a class="btn btn-default btn-lg"><span class="glyphicon @if(question.follow) {glyph-icon-star} else {glyphicon-star-empty}"></span></a>
+                    }
                 </div>
             </div>
             <div class="col-lg-11">
-                <div class="panel panel-info">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                    @question.title
+                    </div>
                     <div class="panel-body">
-                        <p class="text">@answer.text</p>
+                        <p class="text">@question.text</p>
                     </div>
                     <div class="panel-footer">
                         <small class="pull-right">
-                        Answered by @answer.author.getDisplayName() @util.DateFormatter.format(answer.date)</small> &nbsp;
+                            Asked by @question.author.getDisplayName() @util.DateFormatter.format(question.date)</small>&nbsp;
                     </div>
                 </div>
             </div>
         </div>
-    }
 
-    @if(LoginController.isAuthenticated()) {
-        <div id="answerForm" class="row">
-            <div class="page-header">
-                <h3>Post Answer</h3>
-            </div>
-            @helper.form(action = routes.QuestionController.postAnswer(question.id), 'role -> "form") {
-                <div class="form-group">
-                    <textarea class="form-control" id="answerArea" name="text">@form("text").value</textarea>
-                </div>
-
-                <button type="submit" value="Submit" class="btn btn-primary btn-lg">Submit</button>
-            }
+        <div class="page-header">
+            <h3>@question.answers.size Answer(s)</h3>
         </div>
-    }
 
-}
+        @for(answer <- question.answers) {
+            <div class="row">
+                <div class="col-lg-1">
+                    <div class="btn-group-vertical">
+                        @if(LoginController.isAuthenticated) {
+                            <a class="btn btn-default btn-lg" href="@routes.QuestionController.upvoteAnswer(question.id, answer.id)"><span class="glyphicon glyphicon-chevron-up"></span></a>
+                        }
+                    <button type="button" class="btn btn-default btn-lg"><strong class="text-success">@answer.voteCount</strong></button>
+                        @if(LoginController.isAuthenticated) {
+                            <a class="btn btn-default btn-lg" href="@routes.QuestionController.downvoteAnswer(question.id, answer.id)"><span class="glyphicon glyphicon-chevron-down"></span></a>
+                        }
+                    </div>
+                </div>
+                <div class="col-lg-11">
+                    <div class="panel panel-info">
+                        <div class="panel-body">
+                            <p class="text">@answer.text</p>
+                        </div>
+                        <div class="panel-footer">
+                            <small class="pull-right">
+                        Answered by @answer.author.getDisplayName() @util.DateFormatter.format(answer.date)</small> &nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if(LoginController.isAuthenticated) {
+            <div id="answerForm" class="row">
+                <div class="page-header">
+                    <h3>Post Answer</h3>
+                </div>
+                @helper.form(action = routes.QuestionController.postAnswer(question.id), 'role -> "form") {
+                    <div class="form-group">
+                        <textarea class="form-control" id="answerArea" name="text">@form("text").value</textarea>
+                    </div>
+
+                    <button type="submit" value="Submit" class="btn btn-primary btn-lg">Submit</button>
+                }
+            </div>
+        }
+
+    }
