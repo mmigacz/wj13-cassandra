@@ -1,24 +1,30 @@
 package models;
 
 import play.data.validation.Constraints;
+import play.data.validation.ValidationError;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class NewUser extends User {
 
     public NewUser() {
-        super(null);
     }
 
     public NewUser(String login) {
         super(login);
     }
 
-    @Constraints.Required
-    @Constraints.MinLength(8)
     public String password2;
 
-    public String validate() {
-        if (password.compareTo(password2) != 0)
-            return "Passwords don't match";
+    public Map<String, List<ValidationError>> validate() {
+        if (!password.equals(password2)) {
+            Map<String, List<ValidationError>> map = new HashMap<String, List<ValidationError>>(1);
+            map.put("password2", Arrays.asList(new ValidationError("password2", "Passwords don't match")));
+            return map;
+        }
 
         return null;
     }

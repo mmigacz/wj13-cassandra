@@ -1,30 +1,47 @@
-@(user:User)
+@(user: User)
 
-@main("Profile of " + user.getDisplayName()) {
+    @main("Profile of " + user.getDisplayName()) {
 
-<div class="page-header">
-    <h1>@user.getDisplayName()</h1>
-</div>
-
-<div class="row">
-        <div class="col-sm-3 col-md-3">
-            <a href="#" class="thumbnail">
-                <img data-src="holder.js/200x200" alt="..."/>
-            </a>
+        <div class="page-header">
+            <h1>@user.getDisplayName() &nbsp;profile</h1>
         </div>
-        <div >
-            <p>Login: @user.login</p>
-            <p>First name: @user.firstName</p>
-            <p>Last name: @user.lastName</p>
-            <p>Email: @user.email</p>
-            <p>Reputation: @user.reputation</p>
+
+        <div class="row">
+            <div class="col-md-3 col-md-offset-2">
+                <a href="#" class="thumbnail">
+                    <img data-src="holder.js/200x200" alt="..." class="img-responsive"/>
+                </a>
+            </div>
+            <div class="col-md-5">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><label>Login</label></td><td>@user.login</td>
+                        </tr>
+                        <tr>
+                            <td><label>First name</label></td><td>@user.firstName</td>
+                        </tr>
+                        <tr>
+                            <td><label>Last name</label></td><td>@user.lastName</td>
+                        </tr>
+                        <tr>
+                            <td><label>Email</label></td><td>@user.email</td>
+                        </tr>
+                        <tr>
+                            <td><label>Reputation</label></td><td>@user.reputation</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    <div class="row">
-        <a class="btn-primary btn-lg" href="#">Edit</a>
-    </div>
+        @if(user.login == LoginController.getCurrentUser().login) {
+            <div class="row">
+                <div class="col-md-5 col-md-offset-5">
+                    <a class="btn-primary btn-lg pull-right" href="@routes.UserProfileController.edit().url">Edit</a>
+                </div>
+            </div>
+        }
 
-</div>
-
-}
+    }
 
 

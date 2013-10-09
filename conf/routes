@@ -8,7 +8,6 @@ GET     /questions/recent/after/:id         controllers.Application.recentAfter(
 GET     /questions/recent/before/:id        controllers.Application.recentBefore(id: String)
 GET     /                                   controllers.Application.recent()
 
-
 GET     /questions/popular                  controllers.Application.popular()
 GET     /questions/popular/after/:id        controllers.Application.popularAfter(id: String)
 GET     /questions/popular/before/:id       controllers.Application.popularBefore(id: String)
@@ -32,7 +31,9 @@ POST    /register                   controllers.LoginController.register()
 GET     /logout                     controllers.LoginController.logout()
 
 # User profile page
-GET     /profile/:id                controllers.UserProfileController.display(id: String)
+GET     /profile/view/:id           controllers.UserProfileController.display(id: String)
+GET     /profile/edit               controllers.UserProfileController.edit()
+GET     /profile/save               controllers.UserProfileController.saveProfile()
 
 # Question page
 GET     /question/:id               controllers.QuestionController.display(id: String)

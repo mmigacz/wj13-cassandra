@@ -1,0 +1,44 @@
+@(form: Form[User])
+
+@main("Profile") {
+
+    @helper.form(routes.UserProfileController.saveProfile(), 'class -> "form-horizontal", 'role -> "form") {
+        <div class="page-header">
+            <h1>@form("login").value profile</h1>
+        </div>
+
+        @if(form.hasGlobalErrors) {
+            <p class="error">
+            @form.globalError.message
+            </p>
+        }
+        <div class="form-group">
+            <label class="col-lg-4 control-label" for="loginField">Login</label>
+            <div class="col-lg-8">
+                <input class="form-control" id="loginField" type="text" name="login" readonly="true" value="@form("login").value"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-4 control-label" for="firstNameField">First name</label>
+            <div class="col-lg-8">
+                <input class="form-control" id="firstNameField" type="text" name="firstName" placeholder="enter your first name..." value="@form("firstName").value" required="true"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-4 control-label" for="lastNameField">Last name</label>
+            <div class="col-lg-8">
+                <input class="form-control" id="lastNameField" type="text" name="lastName" placeholder="enter your last name..." value="@form("lastName").value" required="true"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-4 control-label" for="emailField">Email</label>
+            <div class="col-lg-8">
+                <input class="form-control" id="emailField" type="email" name="email" placeholder="enter your email..." value="@form("email").value" required="true"/>
+            </div>
+        </div>
+
+        <div class="col-lg-8 col-lg-offset-4">
+            <button type="submit" name="_save" class="btn btn-primary">Save</button>
+        </div>
+    }
+}

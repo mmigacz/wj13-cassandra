@@ -3,22 +3,28 @@ package models;
 import play.data.validation.Constraints;
 
 public class User {
-    @Constraints.Required
-    @Constraints.Pattern("[a-zA-Z0-9_]+")
+    @Constraints.Required(message = "Login is required")
+    @Constraints.Pattern(value = "[a-zA-Z0-9_]*", message="Login should include only alphanumeric characters and underscores")
+    @Constraints.MinLength(value= 3, message = "Minimum length is 3")
     public String login;
 
+    @Constraints.Pattern(value = "[a-zA-Z ]*", message = "First name should consists of letters")
     public String firstName;
+    @Constraints.Pattern(value = "[a-zA-Z ]*", message = "Last name should consists of letters")
     public String lastName;
 
-    @Constraints.Required
-    @Constraints.Email
+    @Constraints.Required(message = "Email is required")
+    @Constraints.Email(message = "This should be a valid email address")
     public String email;
 
-    @Constraints.Required
-    @Constraints.MinLength(8)
+    @Constraints.Required(message = "Password is required")
+    @Constraints.MinLength(value = 8, message = "Password should have 8 characters at least")
     public String password;
 
     public int reputation = 0;
+
+    public User() {
+    }
 
     public User(String login) {
         this.login = login;
