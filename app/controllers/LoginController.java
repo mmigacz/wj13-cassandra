@@ -8,6 +8,7 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.helper.form;
+import views.html.index;
 import views.html.login;
 import views.html.register;
 
@@ -57,7 +58,7 @@ public class LoginController extends Controller {
             return badRequest(login.render(form));
         }
 
-        return redirectBackToReferer();
+        return Application.recent();
     }
 
     public static Result register() {
@@ -74,7 +75,7 @@ public class LoginController extends Controller {
             return badRequest(register.render(form));
         }
 
-        return redirectBackToReferer();
+        return login();
     }
 
     public static Result logout() {

@@ -7,6 +7,14 @@
                 <h1>Register</h1>
             </div>
 
+            @if(form.hasGlobalErrors) {
+                <div class="alert alert-danger col-lg-8 col-lg-offset-2">
+                @for(error <- form.globalErrors) {
+                    @error.message <br/>
+                }
+                </div>
+            }
+
             @if(form.hasErrors) {
                 <div class="alert alert-warning col-lg-8 col-lg-offset-2">
                     Some fields are missing of invalid. Please fill out the form correctly.
@@ -25,7 +33,7 @@
             <div class="form-group @if(!form("firstName").errors.isEmpty) {has-error} else {}">
                 <label class="col-lg-4 control-label" for="firstNameField">First name</label>
                 <div class="col-lg-4">
-                    <input class="form-control" id="firstNameField" type="text" name="firstName" placeholder="enter your first name..." value="@form("firstName").value" required="true"/>
+                    <input class="form-control" id="firstNameField" type="text" name="firstName" placeholder="enter your first name..." value="@form("firstName").value"/>
                 </div>
                 @for(error <- form("firstName").errors) {
                     <span class="help-block">@error.message</span>
@@ -34,7 +42,7 @@
             <div class="form-group @if(!form("lastName").errors.isEmpty) {has-error} else {}">
                 <label class="col-lg-4 control-label" for="lastNameField">Last name</label>
                 <div class="col-lg-4">
-                    <input class="form-control" id="lastNameField" type="text" name="lastName" placeholder="enter your last name..." value="@form("lastName").value" required="true"/>
+                    <input class="form-control" id="lastNameField" type="text" name="lastName" placeholder="enter your last name..." value="@form("lastName").value"/>
                 </div>
                 @for(error <- form("lastName").errors) {
                     <span class="help-block">@error.message</span>

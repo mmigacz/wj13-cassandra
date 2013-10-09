@@ -17,8 +17,6 @@ public class User {
     @Constraints.Email(message = "This should be a valid email address")
     public String email;
 
-    @Constraints.Required(message = "Password is required")
-    @Constraints.MinLength(value = 8, message = "Password should have 8 characters at least")
     public String password;
 
     public int reputation = 0;

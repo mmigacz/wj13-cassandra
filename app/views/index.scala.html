@@ -1,48 +1,56 @@
 @(header: String, questionList: QuestionList)
 
 @main(header) {
-        <div class="row">
-            <ul class="nav nav-pills">
-                <li class="@if(questionList.isCategory(QuestionList.Category.RECENT)) {active} else {}"><a href="@routes.Application.recent()">Recent</a></li>
-                <li class="@if(questionList.isCategory(QuestionList.Category.POPULAR)) {active} else {}"><a href="@routes.Application.popular()">Popular</a></li>
-                <li class="@if(questionList.isCategory(QuestionList.Category.ACTIVE)) {active} else {}"><a href="@routes.Application.active()">Active</a></li>
-                <li class="@if(questionList.isCategory(QuestionList.Category.UNANSWERED)) {active} else {}"><a href="@routes.Application.unanswered()">Unanswered</a></li>
+    <div class="row">
+        <ul class="nav nav-pills">
+            <li class="@if(questionList.isCategory(QuestionList.Category.RECENT)) {active} else {}"><a href="@routes.Application.recent()">
+                Recent</a></li>
+            <li class="@if(questionList.isCategory(QuestionList.Category.POPULAR)) {active} else {}"><a href="@routes.Application.popular()">
+                Popular</a></li>
+            <li class="@if(questionList.isCategory(QuestionList.Category.ACTIVE)) {active} else {}"><a href="@routes.Application.active()">
+                Active</a></li>
+            <li class="@if(questionList.isCategory(QuestionList.Category.UNANSWERED)) {active} else {}"><a href="@routes.Application.unanswered()">
+                Unanswered</a></li>
 
-                @if(LoginController.isAuthenticated()) {
-                    <li class="@if(questionList.isCategory(QuestionList.Category.ASKED_BY_ME)) {active} else {}"><a href="@routes.Application.askedByMe()">Asked</a></li>
-                    <li class="@if(questionList.isCategory(QuestionList.Category.FOLLOWED_BY_ME)) {active} else {}"><a href="@routes.Application.followedByMe()">Followed</a></li>
-                }
-            </ul>
-        </div>
-
-        <div class="row">
-            <div class="page-header">
-                <h1>@header</h1>
-            </div>
-        </div>
-
-        <div class="row">
-            <div id="questions">
-                <table class="table">
-                    <tbody>
-                    @for(question <- questionList.questions) {
-                        <tr>
-                            <td id="answerCount" class="count">@question.answerCount <br/> answers</td>
-                            <td id="voteCount" class="count">@question.voteCount <br/> votes</td>
-                            <td id="viewCount" class="count">@question.viewCount <br/> views</td>
-                            <td id="questionTitle"><a href="@routes.QuestionController.display(question.id)">@question.title</a></td>
-                            <td id="questionAuthor">asked by
-                                <a href="@routes.UserProfileController.display(question.author.login)">@question.author.getDisplayName()</a>
-                                <br/> @util.DateFormatter.format(question.date) </td>
-                        </tr>
-                    }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <ul class="pager">
-             <li class="previous"><a class="btn btn-sm @if(questionList.backwardLink == null) {disabled} else {}" href="@questionList.backwardLink"><span class="glyphicon glyphicon-backward"></span></a></li>
-             <li class="next"><a class="btn btn-sm @if(questionList.forwardLink == null) {disabled} else {}" href="@questionList.forwardLink"><span class="glyphicon glyphicon-forward"></span></a><li>
+            @if(LoginController.isAuthenticated()) {
+                <li class="@if(questionList.isCategory(QuestionList.Category.ASKED_BY_ME)) {active} else {}"><a href="@routes.Application.askedByMe()">
+                    Asked</a></li>
+                <li class="@if(questionList.isCategory(QuestionList.Category.FOLLOWED_BY_ME)) {active} else {}"><a href="@routes.Application.followedByMe()">
+                    Followed</a></li>
+            }
         </ul>
-    }
+    </div>
+
+    <div class="row">
+        <div class="page-header">
+            <h1>@header</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="questions">
+            <table class="table">
+                <tbody>
+                @for(question <- questionList.questions) {
+                    <tr>
+                        <td id="answerCount" class="count">@question.answerCount <br/> answers</td>
+                        <td id="voteCount" class="count">@question.voteCount <br/> votes</td>
+                        <td id="viewCount" class="count">@question.viewCount <br/> views</td>
+                        <td id="questionTitle"><a href="@routes.QuestionController.display(question.id)">@question.title</a></td>
+                        <td id="questionAuthor">asked by
+                            <a href="@routes.UserProfileController.display(question.author.login)">@question.author.getDisplayName()</a>
+                            <br/> @util.DateFormatter.format(question.date) </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-lg-offset-4">
+        <ul class="pager">
+            <li class="previous"><a class="btn btn-sm @if(questionList.backwardLink == null) {disabled} else {}" href="@questionList.backwardLink"><span class="glyphicon glyphicon-backward"></span></a></li>
+            <li class="next"><a class="btn btn-sm @if(questionList.forwardLink == null) {disabled} else {}" href="@questionList.forwardLink"><span class="glyphicon glyphicon-forward"></span></a><li>
+        </ul>
+    </div>
+}

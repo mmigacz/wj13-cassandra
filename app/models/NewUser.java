@@ -20,8 +20,13 @@ public class NewUser extends User {
     public String password2;
 
     public Map<String, List<ValidationError>> validate() {
+        Map<String, List<ValidationError>> map = new HashMap<String, List<ValidationError>>(1);
+        if (password == null || password.length() < 8) {
+            map.put("password", Arrays.asList(new ValidationError("password", "Password is required and should have 8 characters at least")));
+            return map;
+        }
+
         if (!password.equals(password2)) {
-            Map<String, List<ValidationError>> map = new HashMap<String, List<ValidationError>>(1);
             map.put("password2", Arrays.asList(new ValidationError("password2", "Passwords don't match")));
             return map;
         }
