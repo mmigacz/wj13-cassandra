@@ -1,5 +1,6 @@
 package controllers;
 
+import controllers.dao.UserDAO;
 import models.Credentials;
 import models.NewUser;
 import models.User;
@@ -7,8 +8,6 @@ import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.helper.form;
-import views.html.index;
 import views.html.login;
 import views.html.register;
 
@@ -26,11 +25,7 @@ public class LoginController extends Controller {
         String login = session("currentUser");
         if (login == null)
             return null;
-        return getUser(login);
-    }
-
-    public static User getUser(String login) {
-        return new User(login);
+        return UserDAO.getUser(login);
     }
 
     public static Result displayLoginPage() {
@@ -53,12 +48,15 @@ public class LoginController extends Controller {
             form.reject("You must provide both login and password.");
             return badRequest(login.render(form));
         }
-        if (!authenticate(form.get())) {
+
+        Credentials credentials = form.get();
+        if (!UserDAO.authenticate(credentials)) {
             form.reject("Invalid login or password.");
             return badRequest(login.render(form));
         }
 
-        return Application.recent();
+        session().put("currentUser", credentials.login);
+        return RecentQuestionsController.recent();
     }
 
     public static Result register() {
@@ -70,17 +68,19 @@ public class LoginController extends Controller {
         if (form.hasErrors())
             return badRequest(register.render(form));
 
-        if (!createUser(form.get())) {
+        NewUser user = form.get();
+        if (!UserDAO.createUser(user)) {
             form.reject("login", "User already exists.");
             return badRequest(register.render(form));
         }
 
+        session().put("currentUser", user.login);
         return login();
     }
 
     public static Result logout() {
         session().remove("currentUser");
-        return redirectBackToReferer();
+        return RecentQuestionsController.recent();
     }
 
     public static Result redirectBackToReferer() {
@@ -90,23 +90,5 @@ public class LoginController extends Controller {
         session().remove(REFERER);
         return redirect(referer);
     }
-
-    private static boolean authenticate(Credentials credentials) {
-        // TODO: Implement real authentication using Database
-
-        // ------------------
-        session().put("currentUser", credentials.login);
-        return true;
-    }
-
-    private static boolean createUser(NewUser newUser) {
-        // TODO: Implement adding a new user to the database
-
-        // ------------------
-        session().put("currentUser", newUser.login);
-        return true;
-    }
-
-
 
 }

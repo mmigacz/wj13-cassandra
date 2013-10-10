@@ -6,12 +6,18 @@
     </div>
 
     <div class="row">
-        @helper.form(action = routes.NewQuestionController.saveQuestion(), 'role -> "form") {
-            <div class="form-group">
-                <textarea class="form-control" id="answerArea" name="text">@form("text").value</textarea>
-            </div>
-
-            <button type="submit" value="Submit" class="btn btn-primary btn-lg">Submit</button>
-        }
+    @helper.form(action = routes.NewQuestionController.saveQuestion(), 'role -> "form") {
+        <div class="form-group col-lg-6 col-lg-offset-3">
+            <label class="control-label" for="questionTitle">Title</label>
+            <input class="form-control" id="questionTitle" type="text" name="title" value="@form("title").value"/>
+        </div>
+        <div class="form-group col-lg-6 col-lg-offset-3">
+            <label class="control-label" for="questionText">Text</label>
+            <textarea class="form-control" id="questionText" name="text">@form("text").value</textarea>
+        </div>
+        <div class="form-control">
+            <input type="submit" value="Submit" class="btn btn-primary btn-lg"/>
+        </div>
+    }
     </div>
 }
