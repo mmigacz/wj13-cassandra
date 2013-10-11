@@ -24,7 +24,7 @@
             <div class="form-group @if(!form("login").errors.isEmpty) {has-error} else {}">
                 <label class="col-lg-4 control-label" for="loginField">Login</label>
                 <div class="col-lg-4">
-                    <input class="form-control" id="loginField" type="text" name="login" placeholder="enter login here..." value="@form("login").value" required="true"/>
+                    <input class="form-control" id="loginField" type="text" name="login" placeholder="enter login here..." value="@form("login").value"/>
                 </div>
                 @for(error <- form("login").errors) {
                     <span class="help-block">@error.message</span>
@@ -51,7 +51,7 @@
             <div class="form-group @if(!form("email").errors.isEmpty) {has-error} else {}">
                 <label class="col-lg-4 control-label" for="emailField">Email</label>
                 <div class="col-lg-4">
-                    <input class="form-control" id="emailField" type="email" name="email" placeholder="enter your email..." value="@form("email").value" required="true"/>
+                    <input class="form-control" id="emailField" type="email" name="email" placeholder="enter your email..." value="@form("email").value"/>
                 </div>
                 @for(error <- form("email").errors) {
                     <span class="help-block">@error.message</span>
@@ -60,7 +60,7 @@
             <div class="form-group @if(!form("password").errors.isEmpty) {has-error} else {}">
                 <label class="col-lg-4 control-label" for="passwordField">Password</label>
                 <div class="col-lg-4">
-                    <input class="form-control" id="passwordField" type="password" name="password" placeholder="enter your password..." required="true"/>
+                    <input class="form-control" id="passwordField" type="password" name="password" placeholder="enter your password..."/>
                 </div>
                 @for(error <- form("password").errors) {
                     <span class="help-block">@error.message</span>
@@ -69,7 +69,7 @@
             <div class="form-group @if(!form("password2").errors.isEmpty) {has-error} else {}">
                 <label class="col-lg-4 control-label" for="password2Field">Retype password</label>
                 <div class="col-lg-4">
-                    <input class="form-control" id="password2Field" type="password" name="password2" placeholder="retype your password..." required="true"/>
+                    <input class="form-control" id="password2Field" type="password" name="password2" placeholder="retype your password..."/>
                 </div>
                 @for(error <- form("password2").errors) {
                     <span class="help-block">@error.message</span>
