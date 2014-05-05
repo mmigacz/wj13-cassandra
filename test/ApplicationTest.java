@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import models.Question;
+import models.QuestionList;
 import org.junit.*;
 
 import play.mvc.*;
@@ -36,7 +37,7 @@ public class ApplicationTest {
 
     @Test
     public void renderTemplate() {
-        Content html = views.html.index.render(new ArrayList<Question>());
+        Content html = views.html.index.render("test", new QuestionList(QuestionList.Category.ACTIVE, new ArrayList<Question>()));
         assertThat(contentType(html)).isEqualTo("text/html");
         assertThat(contentAsString(html)).contains("Your new application is ready.");
     }

@@ -8,6 +8,6 @@ libraryDependencies ++= Seq(
   cache
 )     
 
-libraryDependencies += "com.datastax.cassandra" % "cassandra-driver-core" % "1.0.3"
+libraryDependencies += "com.datastax.cassandra" % "cassandra-driver-core" % "2.0.1"
 
 play.Project.playJavaSettings
