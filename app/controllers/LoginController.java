@@ -87,6 +87,8 @@ public class LoginController extends Controller {
         String referer = session().get(REFERER);
         if (referer == null)
             referer = request().getHeader(REFERER);
+        if (referer == null)
+            referer = "/";
         session().remove(REFERER);
         return redirect(referer);
     }
