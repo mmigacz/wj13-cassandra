@@ -1,4 +1,4 @@
-name := "wj13-cassandra-"
+name := "wj13-cassandra"
 
 version := "1.0-SNAPSHOT"
 
@@ -8,6 +8,6 @@ libraryDependencies ++= Seq(
   cache
 )     
 
-libraryDependencies += "com.datastax.cassandra" % "cassandra-driver-core" % "2.0.2"
+libraryDependencies += "com.datastax.cassandra" % "cassandra-driver-core" % "2.1.1"
 
 play.Project.playJavaSettings
